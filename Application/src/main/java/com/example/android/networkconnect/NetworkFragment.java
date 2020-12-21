@@ -26,6 +26,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -149,7 +150,7 @@ public class NetworkFragment extends Fragment {
                         (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
                                 && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
                     // If no connectivity, cancel task and update Callback with null data.
-                    mCallback.updateFromDownload(null);
+                    mCallback.updateFromDownload(null, "No internet connection");
                     cancel(true);
                 }
             }
@@ -196,9 +197,9 @@ public class NetworkFragment extends Fragment {
         protected void onPostExecute(Result result) {
             if (result != null && mCallback != null) {
                 if (result.mException != null) {
-                    mCallback.updateFromDownload(result.mException.getMessage());
+                    mCallback.updateFromDownload(null, result.mException.getMessage());
                 } else if (result.mResultValue != null) {
-                    mCallback.updateFromDownload(result.mResultValue);
+                    mCallback.updateFromDownload(result.mResultValue, null);
                 }
                 mCallback.finishDownloading();
             }
@@ -219,7 +220,7 @@ public class NetworkFragment extends Fragment {
         private String downloadUrl(URL url) throws IOException {
             InputStream stream = null;
             HttpsURLConnection connection = null;
-            String result = null;
+            String result = "";
             try {
                 connection = (HttpsURLConnection) url.openConnection();
                 // Timeout for reading InputStream arbitrarily set to 3000ms.
@@ -238,12 +239,20 @@ public class NetworkFragment extends Fragment {
                 if (responseCode != HttpsURLConnection.HTTP_OK) {
                     throw new IOException("HTTP error code: " + responseCode);
                 }
+
                 // Retrieve the response body as an InputStream.
                 stream = connection.getInputStream();
                 publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
+
                 if (stream != null) {
+                    InputStreamReader reader = new InputStreamReader(stream);
+                    BufferedReader bufferedReader = new BufferedReader(reader);
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        result += line + "\n";
+                    }
+                    bufferedReader.close();
                     // Converts Stream to String with max length of 500.
-                    result = readStream(stream, 500);
                     publishProgress(DownloadCallback.Progress.PROCESS_INPUT_STREAM_SUCCESS, 0);
                 }
             } finally {

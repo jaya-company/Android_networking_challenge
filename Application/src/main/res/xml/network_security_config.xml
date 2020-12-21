@@ -4,4 +4,8 @@
     <base-config clearTextTrafficPermitted="false"/>
     <!--Set domain-specific security config using domain-config tags. -->
     <!--See https://developer.android.com/training/articles/security-config.html for more information.-->
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">rickandmortyapi.com</domain>
+    </domain-config>
 </network-security-config>

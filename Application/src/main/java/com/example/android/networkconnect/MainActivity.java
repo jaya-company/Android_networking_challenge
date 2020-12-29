@@ -16,6 +16,7 @@
 
 package com.example.android.networkconnect;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,7 +25,18 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.android.networkconnect.data.RmCharacter;
+import com.example.android.networkconnect.ui.RickMortyListAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Sample Activity demonstrating how to connect to the network and fetch raw
@@ -34,9 +46,14 @@ import android.widget.TextView;
  */
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
+    private static String TAG = MainActivity.class.getSimpleName();
+
     // Reference to the TextView showing fetched data, so we can clear it with a button
     // as necessary.
-    private TextView mDataText;
+//    private TextView mDataText;
+
+    private ListView rmList;
+    private ArrayList<RmCharacter> characters;
 
     // Keep a reference to the NetworkFragment which owns the AsyncTask object
     // that is used to execute network ops.
@@ -50,8 +67,9 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
-        mDataText = (TextView) findViewById(R.id.data_text);
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://www.google.com");
+//        mDataText = (TextView) findViewById(R.id.data_text);
+        rmList = (ListView) findViewById(R.id.rmList);
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://rickandmortyapi.com/api/character");
     }
 
     @Override
@@ -71,7 +89,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
             // Clear the text and cancel download.
             case R.id.clear_action:
                 finishDownloading();
-                mDataText.setText("");
+//                mDataText.setText("");
                 return true;
         }
         return false;
@@ -88,9 +106,35 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     @Override
     public void updateFromDownload(String result) {
         if (result != null) {
-            mDataText.setText(result);
+//            mDataText.setText(result); // handle result here
+            Log.i(TAG, "result => " + result);
+
+            // ---------- parsing here ------------
+
+            try {
+                JSONObject objectResponse = new JSONObject(result);
+                JSONArray charactersArrayJson = objectResponse.getJSONArray("results");
+                ArrayList<RmCharacter> characterArrayList = new ArrayList<RmCharacter>();
+                for (int i = 0; i < charactersArrayJson.length(); i++) {
+                    JSONObject itemObject = charactersArrayJson.getJSONObject(i);
+                    RmCharacter rmCharacter = new RmCharacter();
+                    rmCharacter.setImageUrl(itemObject.getString("image"));
+                    rmCharacter.setName(itemObject.getString("name"));
+                    characterArrayList.add(rmCharacter);
+                }
+
+                RickMortyListAdapter adapter = new RickMortyListAdapter(this, characterArrayList);
+                rmList.setAdapter(adapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            // ---------- end parsing ------------
         } else {
-            mDataText.setText(getString(R.string.connection_error));
+//            mDataText.setText(getString(R.string.connection_error));
+            Toast.makeText(this,"Connection error", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -98,7 +142,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     public NetworkInfo getActiveNetworkInfo() {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        @SuppressLint("MissingPermission") NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo;
     }
 
@@ -121,7 +165,8 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
             case Progress.GET_INPUT_STREAM_SUCCESS:
                 break;
             case Progress.PROCESS_INPUT_STREAM_IN_PROGRESS:
-                mDataText.setText("" + percentComplete + "%");
+//                mDataText.setText("" + percentComplete + "%");
+                Log.i(TAG, "percentComplete: " + "%");
                 break;
             case Progress.PROCESS_INPUT_STREAM_SUCCESS:
                 break;

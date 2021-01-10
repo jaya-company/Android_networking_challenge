@@ -15,19 +15,19 @@
 */
 package com.example.android.networkconnect.tests;
 
-import com.example.android.networkconnect.*;
+import com.example.android.networkconnect.activities.NetworkActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
 * Tests for NetworkConnect sample.
 */
-public class SampleTests extends ActivityInstrumentationTestCase2<MainActivity> {
+public class SampleTests extends ActivityInstrumentationTestCase2<NetworkActivity> {
 
-    private MainActivity mTestActivity;
+    private NetworkActivity mTestActivity;
 
     public SampleTests() {
-        super(MainActivity.class);
+        super(NetworkActivity.class);
     }
 
     @Override

@@ -22,4 +22,7 @@
     <string name="clear_text">Clear</string>
     <string name="connection_error">Connection error.</string>
     <string name="fetch_cancelled">Fetch cancelled.</string>
+
+    <string name="error">There was an error with your request…</string>
+    <string name="exception">There was an exception with your request…</string>
 </resources>

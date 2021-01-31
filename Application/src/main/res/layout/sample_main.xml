@@ -23,20 +23,27 @@
     android:layout_height="fill_parent">
     <TextView
         android:id="@+id/intro_text"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="@string/welcome_message"
-        android:freezesText="true"/>
+        android:freezesText="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
-    <TextView
-        android:id="@+id/data_text"
-        android:layout_weight="1"
+
+    <ProgressBar
+        android:id="@+id/fetch_progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:freezesText="true"/>
+        android:layout_height="80dp"
+        android:layout_marginTop="15dp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

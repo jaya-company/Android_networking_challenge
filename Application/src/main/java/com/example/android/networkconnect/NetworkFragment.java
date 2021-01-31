@@ -24,12 +24,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -149,7 +147,8 @@ public class NetworkFragment extends Fragment {
                         (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
                                 && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
                     // If no connectivity, cancel task and update Callback with null data.
-                    mCallback.updateFromDownload(null);
+                    mCallback.updateFromDownload(null, getString(R.string.no_internet));
+                    mCallback.finishDownloading();
                     cancel(true);
                 }
             }
@@ -196,9 +195,9 @@ public class NetworkFragment extends Fragment {
         protected void onPostExecute(Result result) {
             if (result != null && mCallback != null) {
                 if (result.mException != null) {
-                    mCallback.updateFromDownload(result.mException.getMessage());
+                    mCallback.updateFromDownload(null, result.mException.getMessage());
                 } else if (result.mResultValue != null) {
-                    mCallback.updateFromDownload(result.mResultValue);
+                    mCallback.updateFromDownload(result.mResultValue, null);
                 }
                 mCallback.finishDownloading();
             }
@@ -242,8 +241,8 @@ public class NetworkFragment extends Fragment {
                 stream = connection.getInputStream();
                 publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
                 if (stream != null) {
-                    // Converts Stream to String with max length of 500.
-                    result = readStream(stream, 500);
+                    // Converts Stream to String with max length of 50000.
+                    result = readStream(stream, 50000);
                     publishProgress(DownloadCallback.Progress.PROCESS_INPUT_STREAM_SUCCESS, 0);
                 }
             } finally {

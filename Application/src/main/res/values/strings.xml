@@ -16,10 +16,11 @@
 
 <resources>
     <string name="welcome_message">Welcome to Network Connect!
-        Click FETCH to fetch the first 500 characters of raw HTML from www.google.com.
+        Click FETCH to fetch the first page of characters from Rick and Morty API (https://rickandmortyapi.com/api).
     </string>
     <string name="fetch_text">Fetch</string>
     <string name="clear_text">Clear</string>
     <string name="connection_error">Connection error.</string>
     <string name="fetch_cancelled">Fetch cancelled.</string>
+    <string name="no_internet">No Connection. Make sure Airplane mode is off.</string>
 </resources>

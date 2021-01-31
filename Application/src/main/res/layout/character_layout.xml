@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/characterImage"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/labelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/characterImage"
+        android:layout_toRightOf="@id/characterImage"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:textStyle="bold"
+        android:text="Name:" />
+
+    <TextView
+        android:id="@+id/characterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/labelName"
+        android:layout_toRightOf="@id/labelName"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/labelGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/characterName"
+        android:layout_alignLeft="@id/labelName"
+        android:layout_alignStart="@id/labelName"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:textStyle="bold"
+        android:text="Gender:" />
+
+    <TextView
+        android:id="@+id/characterGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/labelGender"
+        android:layout_toEndOf="@id/labelGender"
+        android:layout_toRightOf="@id/labelGender"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/labelSpecies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/characterGender"
+        android:layout_alignLeft="@id/labelName"
+        android:layout_alignStart="@id/labelName"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:textStyle="bold"
+        android:text="Species:" />
+
+    <TextView
+        android:id="@+id/characterSpecies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/labelSpecies"
+        android:layout_toEndOf="@id/labelSpecies"
+        android:layout_toRightOf="@id/labelSpecies"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/characterType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelSpecies"
+        android:layout_toEndOf="@id/labelSpecies"
+        android:layout_toRightOf="@id/labelSpecies"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        android:text="TextView" />
+
+
+</RelativeLayout>

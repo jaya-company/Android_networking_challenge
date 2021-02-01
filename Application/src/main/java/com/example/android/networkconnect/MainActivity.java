@@ -26,6 +26,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import static com.example.android.networkconnect.api.APIKt.RICKY_AND_MARTY_API_BASE_URL;
+
 /**
  * Sample Activity demonstrating how to connect to the network and fetch raw
  * HTML. It uses a Fragment that encapsulates the network operations on an AsyncTask.
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements DownloadCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
         mDataText = (TextView) findViewById(R.id.data_text);
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://rickandmortyapi.com/api/character");
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), RICKY_AND_MARTY_API_BASE_URL);
     }
 
     @Override
@@ -86,10 +88,9 @@ public class MainActivity extends AppCompatActivity implements DownloadCallback 
     }
 
     @Override
-    public void updateFromDownload(String result) {
-        if (result != null) {
-
-            mDataText.setText(result);
+    public void updateFromDownload(NetworkFragment.Result result) {
+        if (result.mResultValue != null) {
+            mDataText.setText(result.mResultValue.getResults().toString());
         } else {
             mDataText.setText(getString(R.string.connection_error));
         }

@@ -25,12 +25,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.android.networkconnect.dto.CharacterResponse;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -121,26 +125,13 @@ public class NetworkFragment extends Fragment {
     /**
      * Implementation of AsyncTask that runs a network operation on a background thread.
      */
-    private class DownloadTask extends AsyncTask<String, Integer, DownloadTask.Result> {
-
-        /**
-         * Wrapper class that serves as a union of a result value and an exception. When the
-         * download task has completed, either the result value or exception can be a non-null
-         * value. This allows you to pass exceptions to the UI thread that were thrown during
-         * doInBackground().
-         */
-        class Result {
-            public String mResultValue;
-            public Exception mException;
-
-            public Result(String resultValue) {
-                mResultValue = resultValue;
-            }
-
-            public Result(Exception exception) {
-                mException = exception;
-            }
-        }
+    private class DownloadTask extends AsyncTask<String, Integer, Result> {
+        private Gson gson = new Gson();
+        private HostnameVerifier hostnameVerifier = (hostname, session) -> {
+            HostnameVerifier hv =
+                    HttpsURLConnection.getDefaultHostnameVerifier();
+            return hv.verify("example.com", session);
+        };
 
         /**
          * Cancel background network operation if we do not have network connectivity.
@@ -171,7 +162,7 @@ public class NetworkFragment extends Fragment {
                     URL url = new URL(urlString);
                     String resultString = downloadUrl(url);
                     if (resultString != null) {
-                        result = new Result(resultString);
+                        result = parseResponseToDTO(resultString);
                     } else {
                         throw new IOException("No response received.");
                     }
@@ -180,6 +171,11 @@ public class NetworkFragment extends Fragment {
                 }
             }
             return result;
+        }
+
+        private Result parseResponseToDTO(String response) {
+            CharacterResponse characterResponse = gson.fromJson(response, CharacterResponse.class);
+            return new Result(characterResponse);
         }
 
         /**
@@ -199,11 +195,7 @@ public class NetworkFragment extends Fragment {
         @Override
         protected void onPostExecute(Result result) {
             if (result != null && mCallback != null) {
-                if (result.mException != null) {
-                    mCallback.updateFromDownload(result.mException.getMessage());
-                } else if (result.mResultValue != null) {
-                    mCallback.updateFromDownload(result.mResultValue);
-                }
+                mCallback.updateFromDownload(result);
                 mCallback.finishDownloading();
             }
         }
@@ -225,7 +217,9 @@ public class NetworkFragment extends Fragment {
             HttpsURLConnection connection = null;
             String result = null;
             try {
+
                 connection = (HttpsURLConnection) url.openConnection();
+                connection.setHostnameVerifier(hostnameVerifier);
                 connection.setSSLSocketFactory(setTrustManager().getSocketFactory());
                 // Timeout for reading InputStream arbitrarily set to 3000ms.
                 connection.setReadTimeout(3000);
@@ -248,7 +242,7 @@ public class NetworkFragment extends Fragment {
                 publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
                 if (stream != null) {
                     // Converts Stream to String with max length of 500.
-                    result = readStream(stream, 500);
+                    result = readStream(stream, 50000);
                     publishProgress(DownloadCallback.Progress.PROCESS_INPUT_STREAM_SUCCESS, 0);
                 }
             } finally {
@@ -319,4 +313,32 @@ public class NetworkFragment extends Fragment {
         }
         return sslContext;
     }
+
+    /**
+     * Wrapper class that serves as a union of a result value and an exception. When the
+     * download task has completed, either the result value or exception can be a non-null
+     * value. This allows you to pass exceptions to the UI thread that were thrown during
+     * doInBackground().
+     */
+    class Result {
+        public CharacterResponse mResultValue;
+        public Exception mException;
+
+        public Result(CharacterResponse resultValue) {
+            mResultValue = resultValue;
+        }
+
+        public Result(Exception exception) {
+            mException = exception;
+        }
+
+        public CharacterResponse getResultValue() {
+            return mResultValue;
+        }
+
+        public Exception getException() {
+            return mException;
+        }
+    }
+
 }

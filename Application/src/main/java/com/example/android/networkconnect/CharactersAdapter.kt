@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.android.networkconnect.model.Character
-import com.squareup.picasso.Picasso
 
 class CharactersAdapter(private var dataSet: List<Character>) :
         RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
@@ -26,7 +26,9 @@ class CharactersAdapter(private var dataSet: List<Character>) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.name.text = dataSet[position].name
-        Picasso.get().load(dataSet[position].image)
+        Glide.with(viewHolder.image)
+                .load(dataSet[position].image)
+                .centerCrop()
                 .into(viewHolder.image)
     }
 

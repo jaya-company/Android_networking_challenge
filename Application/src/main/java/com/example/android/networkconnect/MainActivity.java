@@ -34,7 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-import static com.example.android.networkconnect.api.APIKt.RICKY_AND_MARTY_API_BASE_URL;
+import static com.example.android.networkconnect.api.APIKt.RICK_AND_MARTY_API_BASE_URL;
 
 /**
  * Sample Activity demonstrating how to connect to the network and fetch raw
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements DownloadCallback 
         RecyclerView mCharactersList = (RecyclerView) findViewById(R.id.characters_recycler);
         mCharactersList.setLayoutManager(new LinearLayoutManager(this));
         mCharactersList.setAdapter(charactersAdapter);
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), RICKY_AND_MARTY_API_BASE_URL);
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), RICK_AND_MARTY_API_BASE_URL);
     }
 
     @Override

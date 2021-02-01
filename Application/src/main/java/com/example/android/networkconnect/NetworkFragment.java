@@ -22,6 +22,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -83,7 +84,7 @@ public class NetworkFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         // Host Activity will handle callbacks from task.
         mCallback = (DownloadCallback) context;
@@ -241,8 +242,7 @@ public class NetworkFragment extends Fragment {
                 stream = connection.getInputStream();
                 publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
                 if (stream != null) {
-                    // Converts Stream to String with max length of 500.
-                    result = readStream(stream, 50000);
+                    result = readStream(stream, 20000);
                     publishProgress(DownloadCallback.Progress.PROCESS_INPUT_STREAM_SUCCESS, 0);
                 }
             } finally {

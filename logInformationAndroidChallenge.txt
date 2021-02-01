@@ -1,0 +1,191 @@
+commit f8b1fc494e55ed969b97f02bbe355eaf8cf4d7cf
+Author: Oscar P <opastas@uoc.edu>
+Date:   Mon Feb 1 00:17:13 2021 -0500
+
+    "Menu updated to be used with code refactored"
+
+commit eec45a906a367097fc5c9efaacec514a2c10b9d3
+Author: Oscar P <opastas@uoc.edu>
+Date:   Mon Feb 1 00:14:56 2021 -0500
+
+    "Updated some libraries, created some lines for future dep. injection. Some files were organized and refactored"
+
+commit 4740a18c65be1b7e1140d6f9025dbcc5e1f6d9f3
+Author: Oscar P <opastas@uoc.edu>
+Date:   Mon Feb 1 00:12:45 2021 -0500
+
+    "Manifest updated to avoid actionBar theme exception. Template with this style was updated"
+
+commit 49902033b2300fd156a5c0c8f8163ee3d0fb3f31
+Author: Oscar P <opastas@uoc.edu>
+Date:   Mon Feb 1 00:09:54 2021 -0500
+
+    "Added Moshi to be used in project, updated gradle, and some lib and dep to improve compatibility. Project gradle from app gradle were split"
+
+commit 9f63cd20803624d7b05b1b9f126dd95efd096e80
+Author: Oscar P <opastas@uoc.edu>
+Date:   Mon Feb 1 00:07:20 2021 -0500
+
+    "Layout fixes in recycler view and character"
+
+commit 240e65e5de3016652365ac6d145b2071c875583d
+Author: Oscar P <opastas@uoc.edu>
+Date:   Mon Feb 1 00:04:18 2021 -0500
+
+    "Added moshi library instead of gson for its advantages reading field names, code is resized"
+
+commit 0ef68ce640071a19a3a93bd3024f2b67e55e129d
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 23:52:55 2021 -0500
+
+    "Response created to unwrap results from get request done with retrofit to host"
+
+commit 7e0d0d9b6c69b887057423c01741fc24c802ff0a
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 23:49:31 2021 -0500
+
+    "Application file, module and component to extend scope of project when required continuing with Dagger dep inj"
+
+commit 610119492468a719fcfb67b48f3889bc76bd67f2
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 01:39:14 2021 -0500
+
+    "Updated Main Activity imports, and data fragment ref is updated"
+
+commit 131f7b00ee71248bd0f171e06fd238f19815f985
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 01:36:44 2021 -0500
+
+    "Updated Dagger ref after build, and imported files"
+
+commit 9649e997eef0b55658e047a045ee823a9c7c8b87
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 00:55:35 2021 -0500
+
+    "Character list adapter created to properly show every item_character in a recycler view"
+
+commit 41fd1ff38ca58636c32ea0751d35de2cfbc62cf9
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 00:54:11 2021 -0500
+
+    "Fragment layout created to display list of characters"
+
+commit 86a98fba67a835ff92c6d9a28212bed29338bc9e
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 00:19:05 2021 -0500
+
+    "Some styles and dimensions to be used in layouts were created"
+
+commit 62fc2e16ed9964b4d86034e5668fc9eae2ad901b
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sun Jan 31 00:17:47 2021 -0500
+
+    "Created xml layout - single row (from the list) to display character data and image"
+
+commit c18050a5583975ba7662bc8824d56c7452e6deaf
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 23:49:19 2021 -0500
+
+    "Utilities to load image using glide and give parameters to progress drawable layout to be used while loading images"
+
+commit 3be3659ad46c4cd100a0de5c184d8d9f02443557
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 23:45:35 2021 -0500
+
+    "Resources to be used in case of error, loading image"
+
+commit dab65f3493a836f50dd26fb2c46047453d38468a
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 23:33:26 2021 -0500
+
+    "Created view model to be used in getting characters using service and api and be shown on ui"
+
+commit ab90ea51a277c9d98d27199a800886548a3d31f5
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 23:23:32 2021 -0500
+
+    "Created data service to get Characters using api and init Dagger"
+
+commit 02558f709b862222a6a7dcf5af8919308f801c54
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 23:12:05 2021 -0500
+
+    "Created DataApi File to create a get req and be used to retrieve data from host"
+
+commit 0637074a4cf5852a41c02957a1805376cf526fd2
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 23:05:16 2021 -0500
+
+    "Created module to use Retrofit library and provide data"
+
+commit b9422b6ad599b28bc19828abf30653f2a33a8b4c
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 22:59:28 2021 -0500
+
+    "Created file to be used in layout for Main Activity"
+
+commit 1712dd52c3db975917416418433e1881d40ca580
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 22:54:57 2021 -0500
+
+    "Created interface to be used for injection"
+
+commit e7a3eec2fc07f69a97db0491f015ef673bc344aa
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 22:31:19 2021 -0500
+
+    "Created data model for characters"
+
+commit ea6fd39e1fb925d5133070fbbef0cb356eac61b0
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 22:18:30 2021 -0500
+
+    "Fragment to display data/characters retrieved from host"
+
+commit 65a01c4697113bb573139c5ad62da4373dd60a0c
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 20:53:32 2021 -0500
+
+    "Created file and re-organized StatusActivity (linked with Network Fragment) from Main Activity to improve code"
+
+commit 6a074bae30867368f416879c532eb6053c65a04a
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 18:37:29 2021 -0500
+
+    "Created file to be used in network request, new thread from fragment / activity"
+
+commit f5f7607689d45826f60e678402208b2ae3fd38e1
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 18:00:46 2021 -0500
+
+    "Updated kotlin files starting to define status activity to check network status"
+
+commit ee67209be823a4cfcb37883f97a86ed52506624d
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 16:37:30 2021 -0500
+
+    file conversion network
+
+commit 4075226d68e5ae828d14ff5ed4cf5df5ba30d3fc
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 16:14:10 2021 -0500
+
+    file conversion DownloadCallback
+
+commit 49c8e78bc4613efe91ba9aee4358de542aa954db
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 16:01:39 2021 -0500
+
+    file conversion
+
+commit 80d5b71785b935678e3074bbc1b43ed6f351c6b6
+Author: Oscar P <opastas@uoc.edu>
+Date:   Sat Jan 30 13:57:52 2021 -0500
+
+    Updated gradle files
+
+commit 29430ff190d26010ab453ae28f9a00ef09070404
+Author: Oscar P <opastas@uoc.edu>
+Date:   Fri Jan 29 23:01:21 2021 -0500
+
+    Project added

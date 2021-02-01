@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements DownloadCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
         mDataText = (TextView) findViewById(R.id.data_text);
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://www.google.com");
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://rickandmortyapi.com/api/character");
     }
 
     @Override

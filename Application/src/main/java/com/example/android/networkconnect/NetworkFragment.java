@@ -21,6 +21,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,8 +29,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Implementation of headless Fragment that runs an AsyncTask to fetch data from the network.
@@ -77,7 +82,7 @@ public class NetworkFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         // Host Activity will handle callbacks from task.
-        mCallback = (DownloadCallback)context;
+        mCallback = (DownloadCallback) context;
     }
 
     @Override
@@ -127,9 +132,11 @@ public class NetworkFragment extends Fragment {
         class Result {
             public String mResultValue;
             public Exception mException;
+
             public Result(String resultValue) {
                 mResultValue = resultValue;
             }
+
             public Result(Exception exception) {
                 mException = exception;
             }
@@ -168,7 +175,7 @@ public class NetworkFragment extends Fragment {
                     } else {
                         throw new IOException("No response received.");
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     result = new Result(e);
                 }
             }
@@ -219,6 +226,7 @@ public class NetworkFragment extends Fragment {
             String result = null;
             try {
                 connection = (HttpsURLConnection) url.openConnection();
+                connection.setSSLSocketFactory(setTrustManager().getSocketFactory());
                 // Timeout for reading InputStream arbitrarily set to 3000ms.
                 connection.setReadTimeout(3000);
                 // Timeout for connection.connect() arbitrarily set to 3000ms.
@@ -282,5 +290,33 @@ public class NetworkFragment extends Fragment {
             }
             return result;
         }
+    }
+
+    private SSLContext setTrustManager() {
+        SSLContext sslContext = null;
+        try {
+            TrustManager[] tm = {
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(X509Certificate[] chain, String authType) {
+                        }
+
+                        @Override
+                        public void checkServerTrusted(X509Certificate[] chain, String authType) {
+                        }
+
+                        @Override
+                        public X509Certificate[] getAcceptedIssuers() {
+                            return null;
+                        }
+                    }
+            };
+            sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, tm, null);
+            HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sslContext;
     }
 }

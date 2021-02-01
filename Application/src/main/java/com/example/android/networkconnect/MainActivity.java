@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements DownloadCallback 
     @Override
     public void updateFromDownload(String result) {
         if (result != null) {
+
             mDataText.setText(result);
         } else {
             mDataText.setText(getString(R.string.connection_error));

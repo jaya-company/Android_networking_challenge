@@ -20,8 +20,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -32,7 +32,7 @@ import android.widget.TextView;
  *
  * This sample uses a TextView to display output.
  */
-public class MainActivity extends FragmentActivity implements DownloadCallback {
+public class MainActivity extends AppCompatActivity implements DownloadCallback {
 
     // Reference to the TextView showing fetched data, so we can clear it with a button
     // as necessary.

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <!--Set application-wide security config using base-config tag.-->
-    <base-config clearTextTrafficPermitted="false"/>
+    <debug-overrides>
+        <trust-anchors>
+            <!-- Trust user added CAs while debuggable only -->
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">rickandmortyapi.com"</domain>
+    </domain-config>
     <!--Set domain-specific security config using domain-config tags. -->
     <!--See https://developer.android.com/training/articles/security-config.html for more information.-->
+
 </network-security-config>

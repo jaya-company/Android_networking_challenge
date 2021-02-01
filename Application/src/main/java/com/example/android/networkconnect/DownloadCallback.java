@@ -17,7 +17,8 @@
 package com.example.android.networkconnect;
 
 import android.net.NetworkInfo;
-import android.support.annotation.IntDef;
+
+import com.example.android.networkconnect.dto.CharacterResponse;
 
 /**
  * Sample interface containing bare minimum methods needed for an asynchronous task
@@ -37,7 +38,7 @@ public interface DownloadCallback {
      * Indicates that the callback handler needs to update its appearance or information based on
      * the result of the task. Expected to be called from the main thread.
      */
-    void updateFromDownload(String result);
+    void updateFromDownload(NetworkFragment.Result result);
 
     /**
      * Get the device's active network status in the form of a NetworkInfo object.

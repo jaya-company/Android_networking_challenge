@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.networkconnect;
+package com.example.android.networkconnect.OldModule;
 
 import android.net.NetworkInfo;
 import android.support.annotation.IntDef;

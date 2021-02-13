@@ -15,7 +15,7 @@
 */
 package com.example.android.networkconnect.tests;
 
-import com.example.android.networkconnect.*;
+import com.example.android.networkconnect.OldModule.MainActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 

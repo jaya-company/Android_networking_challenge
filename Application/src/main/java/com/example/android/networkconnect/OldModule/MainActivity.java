@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.android.networkconnect;
+package com.example.android.networkconnect.OldModule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.android.networkconnect.R;
+import com.example.android.networkconnect.RickMortyAPI.RickAndMortyActivity;
 
 /**
  * Sample Activity demonstrating how to connect to the network and fetch raw
@@ -73,6 +77,10 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
                 finishDownloading();
                 mDataText.setText("");
                 return true;
+            case R.id.characters:
+                startActivity(new Intent(this, RickAndMortyActivity.class));
+                return true;
+
         }
         return false;
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.networkconnect;
+package com.example.android.networkconnect.OldModule;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -22,15 +22,13 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
+
 
 import javax.net.ssl.HttpsURLConnection;
 

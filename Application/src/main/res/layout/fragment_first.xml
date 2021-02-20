@@ -1,0 +1,70 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".presentation.FirstFragment">
+
+    <TextView
+        android:id="@+id/intro_text"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+        android:text="@string/welcome_message"
+        android:freezesText="true"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/llnextscreen2"
+        android:visibility="gone"
+        android:orientation="vertical" >
+        <TextView
+            android:text="@string/fetching_data"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/llnextscreen"
+        android:visibility="gone"
+        android:orientation="vertical" >
+
+        <TextView
+            android:text="@string/characters_ready"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            />
+
+        <Button
+            android:id="@+id/btnOpenDialog"
+            android:layout_height="50dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_blue_bright"
+            android:text="@string/open_list"
+            android:layout_marginBottom="20dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

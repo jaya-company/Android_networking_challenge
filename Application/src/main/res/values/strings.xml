@@ -22,4 +22,8 @@
     <string name="clear_text">Clear</string>
     <string name="connection_error">Connection error.</string>
     <string name="fetch_cancelled">Fetch cancelled.</string>
+    <string name="title_activity_main">NetworkConnect</string>
+    <string name="characters_ready">Characters Ready to show</string>
+    <string name="fetching_data">Fetching…</string>
+    <string name="open_list">"Open list "</string>
 </resources>
